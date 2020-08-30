@@ -37,4 +37,4 @@
 >> GoodEnding(男女主存活且若干数值判定通过)、NormalEnding(其他)、BadEnding(女主死亡)
 
 ### 游戏分级
->> R18 1
+>> R18 
