@@ -43,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
             sf.FlashScreen();
             health -= damage;
             HealthBar.HealthCurrent = health;
+            //anim.SetTrigger("Hit");
             if (health <= 0)
             {
                 health = 0;
