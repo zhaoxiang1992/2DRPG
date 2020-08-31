@@ -43,7 +43,6 @@ public class PlayerHealth : MonoBehaviour
             sf.FlashScreen();
             health -= damage;
             HealthBar.HealthCurrent = health;
-            //anim.SetTrigger("Hit");
             if (health <= 0)
             {
                 health = 0;
@@ -52,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
                 //rb2d.gravityScale = 0.0f;
                 GameController.isGameAlive = false;
                 anim.SetTrigger("Die");
+                polygonCollider2D.enabled = false;
                 Invoke("KillPlayer", dieTime);
             }
             else

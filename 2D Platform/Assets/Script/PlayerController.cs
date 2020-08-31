@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
     public float jumpSpeed;
     public float doubleJumpSpeed;
+    public float restoreTime;
 
     private Rigidbody2D myRigidbody;
     private Animator myAnim;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool isGround;
     private bool canDoubleJump;
     private bool jumpPressed;
+    private bool isOnwayPlatform;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
             //Run();
             //Attack();
             CheckGround();
+            OnWayPlatformCheck();
             SwitchAnimation();
         }
     }
@@ -52,7 +55,9 @@ public class PlayerController : MonoBehaviour
     void CheckGround()
     {
         isGround = myFeet.IsTouchingLayers(LayerMask.GetMask("Ground")) ||
-                          myFeet.IsTouchingLayers(LayerMask.GetMask("MovingPlatform"));
+                          myFeet.IsTouchingLayers(LayerMask.GetMask("MovingPlatform")) ||
+                          myFeet.IsTouchingLayers(LayerMask.GetMask("OnewayPlatform"));
+        isOnwayPlatform = myFeet.IsTouchingLayers(LayerMask.GetMask("OnewayPlatform"));
     }
 
     //void Flip() 
@@ -147,6 +152,35 @@ public class PlayerController : MonoBehaviour
         {
             myAnim.SetBool("DoubleFall", false);
             myAnim.SetBool("Idle", true);
+        }
+    }
+
+    void OnWayPlatformCheck()
+    {
+        if (isGround && gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
+        }
+
+        //if (Input.GetButtonDown("Vertical") && Input.GetButtonDown("jump"))
+        //{
+        //    gameObject.layer = LayerMask.NameToLayer("OnewayPlatform");
+        //    Invoke("RestorePlayerLayer", restoreTime);
+        //}
+
+        float moveY = Input.GetAxisRaw("Vertical");
+        if (isOnwayPlatform && moveY < -0.1f /*&& Input.GetButtonDown("jump")*/)
+        {
+            gameObject.layer = LayerMask.NameToLayer("OnewayPlatform");
+            Invoke("RestorePlayerLayer", restoreTime);
+        }
+    }
+
+    void RestorePlayerLayer()
+    {
+        if (!isGround && gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
         }
     }
 }
