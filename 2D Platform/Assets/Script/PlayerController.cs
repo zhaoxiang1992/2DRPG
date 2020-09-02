@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
     public float jumpSpeed;
     public float doubleJumpSpeed;
+    public float climbSpeed;
     public float restoreTime;
 
     private Rigidbody2D myRigidbody;
@@ -17,12 +18,23 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed;
     private bool isOnwayPlatform;
 
+    private bool isLadder;
+    private bool isClimbing;
+
+    private bool isJumping;
+    private bool isFalling;
+    private bool isDoubleJumping;
+    private bool isDoubleFalling;
+
+    private float playerGravity;
+
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         myFeet = GetComponent<BoxCollider2D>();
+        playerGravity = myRigidbody.gravityScale;
     }
 
     // Update is called once per frame
@@ -38,6 +50,8 @@ public class PlayerController : MonoBehaviour
             //Run();
             //Attack();
             CheckGround();
+            CheckLadder();
+            CheckAirStatus();
             OnWayPlatformCheck();
             SwitchAnimation();
         }
@@ -49,6 +63,7 @@ public class PlayerController : MonoBehaviour
         {
             Run();
             jump();
+            Climb();
         }
     }
 
@@ -58,6 +73,11 @@ public class PlayerController : MonoBehaviour
                           myFeet.IsTouchingLayers(LayerMask.GetMask("MovingPlatform")) ||
                           myFeet.IsTouchingLayers(LayerMask.GetMask("OnewayPlatform"));
         isOnwayPlatform = myFeet.IsTouchingLayers(LayerMask.GetMask("OnewayPlatform"));
+    }
+
+    void CheckLadder()
+    {
+        isLadder = myFeet.IsTouchingLayers(LayerMask.GetMask("Ladder"));
     }
 
     //void Flip() 
@@ -89,6 +109,40 @@ public class PlayerController : MonoBehaviour
         }
         bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
         myAnim.SetBool("Run", playerHasXAxisSpeed);
+    }
+
+    void Climb()
+    {
+        if (isLadder)
+        {
+            float moveY = Input.GetAxis("Vertical");
+            if (moveY > 0.5f || moveY < -0.5)
+            {
+                myAnim.SetBool("Climbing", true);
+                myRigidbody.gravityScale = 0.0f;
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, moveY * climbSpeed);
+            }
+            else if (myRigidbody.velocity.x != 0)
+            {
+                if (isJumping || isFalling || isDoubleJumping || isDoubleFalling)
+                {
+                    myAnim.SetBool("Climbing",false);
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 0.0f);
+                }
+                else
+                {
+                    myAnim.SetBool("Climbing", false);
+                    myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, 0.0f);
+                }
+            }
+        }
+        else
+        {
+            myAnim.SetBool("Climbing", false);
+            myRigidbody.gravityScale = playerGravity;
+        }
+
+
     }
 
     void jump()
@@ -182,5 +236,14 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.layer = LayerMask.NameToLayer("Player");
         }
+    }
+
+    void CheckAirStatus()
+    {
+        isJumping = myAnim.GetBool("Jump");
+        isFalling = myAnim.GetBool("Fall");
+        isDoubleJumping = myAnim.GetBool("DoubleJump");
+        isDoubleFalling = myAnim.GetBool("DoubleFall");
+        isClimbing = myAnim.GetBool("Climbing");
     }
 }

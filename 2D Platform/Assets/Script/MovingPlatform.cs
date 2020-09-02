@@ -53,6 +53,11 @@ public class MovingPlatform : MonoBehaviour
             other.gameObject.transform.parent = gameObject.transform;
         }
 
+        if (other.CompareTag("Item") && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
+        {
+            other.gameObject.transform.parent = gameObject.transform;
+        }
+
     }
 
     void OnTriggerExit2D(Collider2D other)

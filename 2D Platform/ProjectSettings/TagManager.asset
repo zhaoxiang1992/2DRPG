@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - CameraShake
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -21,9 +22,9 @@ TagManager:
   - Spike
   - MovingPlatform
   - OnewayPlatform
-  - 
-  - 
-  - 
+  - Ladder
+  - Item
+  - TriggerBox
   - 
   - 
   - 
@@ -48,6 +49,12 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 3900374555
+    locked: 0
+  - name: Ladder
+    uniqueID: 3445698169
+    locked: 0
+  - name: Item
+    uniqueID: 2892364053
     locked: 0
   - name: Enemy
     uniqueID: 2429697001
