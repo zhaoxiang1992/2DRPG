@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 8788560572341162761}
   - component: {fileID: 8788560572341162766}
   - component: {fileID: 8788560572341162767}
+  - component: {fileID: 5552045899507800984}
   m_Layer: 10
   m_Name: EnemyBat
   m_TagString: Enemy
@@ -172,6 +173,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -183,6 +186,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -193,7 +197,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1865270295
-  m_SortingLayer: 2
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6fdf64212fc62e94188030e99703d4db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -268,8 +272,33 @@ MonoBehaviour:
   flashtime: 0.2
   bloodEffect: {fileID: 6808663756532673696, guid: c542829aa9ebd714bba32889c8a07b22,
     type: 3}
+  dropCoin: {fileID: 2339808144088721349, guid: 77e84355f95553f419fa023d87f7f2e6,
+    type: 3}
+  floatPoint: {fileID: 1394053657416079198, guid: 0954647f33007ad4697aa098565c2ded,
+    type: 3}
   speed: 2
   startWaitTime: 0.2
   movePos: {fileID: 8788560571935290404}
   leftDownPos: {fileID: 8788560570901628038}
   rightUpPos: {fileID: 8788560571577312810}
+--- !u!50 &5552045899507800984
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8788560572341162764}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
