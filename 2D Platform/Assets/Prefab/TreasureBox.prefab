@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8a2a53aa2c36e4d90bd9a21f094a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treasure: {fileID: 0}
+  treasure: {fileID: 2339808144088721349, guid: 77e84355f95553f419fa023d87f7f2e6,
+    type: 3}
   dropTime: 0.5
   treasureXSpeed: 2
   treasureYSpeed: 5

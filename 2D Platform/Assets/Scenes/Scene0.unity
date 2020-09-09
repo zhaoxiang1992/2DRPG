@@ -7885,12 +7885,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1226946900}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &242698802 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2339808144088721349, guid: 77e84355f95553f419fa023d87f7f2e6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1705254991}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &254375399 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3883198388604501533, guid: 8ac7ac758ac58db4fa77fd957960d92e,
@@ -8594,6 +8588,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2339808144088721346, guid: 77e84355f95553f419fa023d87f7f2e6,
     type: 3}
   m_PrefabInstance: {fileID: 1705254991}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1129528420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7151418695079570825, guid: 4f48ded057ec71c47949e6712d80e59b,
+    type: 3}
+  m_PrefabInstance: {fileID: 9163179770202972668}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1200900362 stripped
 Transform:
@@ -12071,7 +12071,8 @@ PrefabInstance:
         type: 3}
       propertyPath: treasure
       value: 
-      objectReference: {fileID: 242698802}
+      objectReference: {fileID: 2339808144088721349, guid: 77e84355f95553f419fa023d87f7f2e6,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18f961a401474f444a5565a16e452ee6, type: 3}
 --- !u!1001 &4802225757645710513
@@ -12086,6 +12087,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 4802225757240619834, guid: 4f90678e4fc081445bc1cffe5719257b,
+        type: 3}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 1129528420}
     - target: {fileID: 4802225757240619837, guid: 4f90678e4fc081445bc1cffe5719257b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12635,7 +12641,7 @@ PrefabInstance:
     - target: {fileID: 8788560572341162767, guid: a42bea2af8b307a4f9a226624cc9204f,
         type: 3}
       propertyPath: health
-      value: 10000
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a42bea2af8b307a4f9a226624cc9204f, type: 3}
@@ -12715,6 +12721,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1066503845}
     m_Modifications:
+    - target: {fileID: 723173235465582867, guid: 4f48ded057ec71c47949e6712d80e59b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 723173235465582867, guid: 4f48ded057ec71c47949e6712d80e59b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140703453026459808, guid: 4f48ded057ec71c47949e6712d80e59b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587700545977309062, guid: 4f48ded057ec71c47949e6712d80e59b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9163179770244172808, guid: 4f48ded057ec71c47949e6712d80e59b,
         type: 3}
       propertyPath: trashBinPos
