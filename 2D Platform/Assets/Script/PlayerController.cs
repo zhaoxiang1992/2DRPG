@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
             {
                 jumpPressed = true;
             }
-            //Flip();
+            Flip();
             //Run();
             //Attack();
             CheckGround();
@@ -80,33 +80,38 @@ public class PlayerController : MonoBehaviour
         isLadder = myFeet.IsTouchingLayers(LayerMask.GetMask("Ladder"));
     }
 
-    //void Flip() 
-    //{
-    //    bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
-    //    if (playerHasXAxisSpeed) 
-    //    {
-    //        if (myRigidbody.velocity.x > 0.1f)
-    //        {
-    //            transform.localRotation = Quaternion.Euler(0,0,0);
-    //            //Debug.Log(playerHasXAxisSpeed);
-    //        }
-    //        if (myRigidbody.velocity.x < -0.1f)
-    //        {
-    //            transform.localRotation = Quaternion.Euler(0, 180, 0);
-    //            //Debug.Log(playerHasXAxisSpeed);
-    //        }
-    //    }
-    //}
+    void Flip()
+    {
+        bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        if (playerHasXAxisSpeed)
+        {
+            if (myRigidbody.velocity.x > 0.1f)
+            {
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                //Debug.Log(playerHasXAxisSpeed);
+            }
+            if (myRigidbody.velocity.x < -0.1f)
+            {
+                transform.localRotation = Quaternion.Euler(0, 180, 0);
+                //Debug.Log(playerHasXAxisSpeed);
+            }
+        }
+    }
 
     void Run()
     {
+        //float moveDir = Input.GetAxisRaw("Horizontal");
+        //Vector2 playerVel = new Vector2(moveDir * runSpeed, myRigidbody.velocity.y);
+        //myRigidbody.velocity = playerVel;
+        //if (moveDir != 0)
+        //{
+        //    transform.localScale = new Vector3(moveDir, 1, 1);
+        //}
+        //bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        //myAnim.SetBool("Run", playerHasXAxisSpeed);
         float moveDir = Input.GetAxisRaw("Horizontal");
-        Vector2 playerVel = new Vector2(moveDir * runSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVel;
-        if (moveDir != 0)
-        {
-            transform.localScale = new Vector3(moveDir, 1, 1);
-        }
+        Vector2 playerVelocity = new Vector2(moveDir * runSpeed, myRigidbody.velocity.y);
+        myRigidbody.velocity = playerVelocity;
         bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
         myAnim.SetBool("Run", playerHasXAxisSpeed);
     }

@@ -18,6 +18,6 @@ public class CoinUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinQuantity.text = CurrentCoinQuantity.ToString();
+        coinQuantity.text = "x  " + CurrentCoinQuantity.ToString();
     }
 }

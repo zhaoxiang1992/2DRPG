@@ -38,31 +38,34 @@ public class PlayerHealth : MonoBehaviour
 
     public void DamagePlayer(int damage) 
     {
-        if (!isInvincible)
+        if (GameController.isGameAlive)
         {
-            sf.FlashScreen();
-            health -= damage;
-            HealthBar.HealthCurrent = health;
-            if (health <= 0)
+            if (!isInvincible)
             {
-                health = 0;
+                sf.FlashScreen();
+                health -= damage;
                 HealthBar.HealthCurrent = health;
-                rb2d.velocity = new Vector2(0, 0);
-                //rb2d.gravityScale = 0.0f;
-                GameController.isGameAlive = false;
-                anim.SetTrigger("Die");
-                polygonCollider2D.enabled = false;
-                Invoke("KillPlayer", dieTime);
+                if (health <= 0)
+                {
+                    health = 0;
+                    HealthBar.HealthCurrent = health;
+                    rb2d.velocity = new Vector2(0, 0);
+                    //rb2d.gravityScale = 0.0f;
+                        anim.SetTrigger("Die");
+                    GameController.isGameAlive = false;
+                    polygonCollider2D.enabled = false;
+                    Invoke("KillPlayer", dieTime);
+                }
+                else
+                {
+                    isInvincible = true;
+                    BlinkPlayer(blinks, time);
+                    polygonCollider2D.enabled = false;
+                    StartCoroutine(ShowPlayerHitBox());
+                    Invoke("Invincible", invincibleTime);
+                }
             }
-            else
-            {
-                isInvincible = true;
-                BlinkPlayer(blinks, time);
-                polygonCollider2D.enabled = false;
-                StartCoroutine(ShowPlayerHitBox());
-                Invoke("Invincible", invincibleTime);
-            }
-        }
+          }
     }
 
     IEnumerator ShowPlayerHitBox()
