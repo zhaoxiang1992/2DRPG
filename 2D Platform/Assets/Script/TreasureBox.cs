@@ -11,6 +11,23 @@ public class TreasureBox : MonoBehaviour
     private bool canOpen;
     private bool isOpened;
     private Animator anim;
+    private PlayerInputActions controls;
+
+    void Awake()
+    {
+        controls = new PlayerInputActions();
+        controls.GamePlay.Interactive.started += ctx => OpenTreasureBox();
+    }
+
+    void OnEnable()
+    {
+        controls.GamePlay.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.GamePlay.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +39,12 @@ public class TreasureBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //OpenTreasureBox();
+    }
+
+    void OpenTreasureBox()
+    { 
+        //if (Input.GetKeyDown(KeyCode.E))
         {
             if (canOpen && !isOpened)
             {

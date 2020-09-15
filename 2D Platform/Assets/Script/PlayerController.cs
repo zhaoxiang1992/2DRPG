@@ -28,6 +28,31 @@ public class PlayerController : MonoBehaviour
 
     private float playerGravity;
 
+    private PlayerInputActions controls;
+    private Vector2 move;
+
+
+    void Awake()
+    {
+        controls = new PlayerInputActions();
+
+        controls.GamePlay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+        controls.GamePlay.Move.canceled += ctx => move = Vector2.zero;
+
+        controls.GamePlay.Jump.started += ctx => isJumpPress();
+    }
+
+    void OnEnable()
+    {
+        controls.GamePlay.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.GamePlay.Disable();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameController.isGameAlive)
         {
-            if (Input.GetButtonDown("Jump"))
-            {
-                jumpPressed = true;
-            }
+            //isJumpPress();
             Flip();
             //Run();
             //Attack();
@@ -65,6 +87,14 @@ public class PlayerController : MonoBehaviour
             jump();
             Climb();
         }
+    }
+
+    void isJumpPress()
+    {
+        //if (Input.GetButtonDown("Jump"))
+        //{
+            jumpPressed = true;
+        //}
     }
 
     void CheckGround()
@@ -109,8 +139,14 @@ public class PlayerController : MonoBehaviour
         //}
         //bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
         //myAnim.SetBool("Run", playerHasXAxisSpeed);
-        float moveDir = Input.GetAxisRaw("Horizontal");
-        Vector2 playerVelocity = new Vector2(moveDir * runSpeed, myRigidbody.velocity.y);
+
+        //float moveDir = Input.GetAxisRaw("Horizontal");
+        //Vector2 playerVelocity = new Vector2(moveDir * runSpeed, myRigidbody.velocity.y);
+        //myRigidbody.velocity = playerVelocity;
+        //bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        //myAnim.SetBool("Run", playerHasXAxisSpeed);
+
+        Vector2 playerVelocity = new Vector2(move.x * runSpeed, myRigidbody.velocity.y);
         myRigidbody.velocity = playerVelocity;
         bool playerHasXAxisSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
         myAnim.SetBool("Run", playerHasXAxisSpeed);
@@ -227,7 +263,8 @@ public class PlayerController : MonoBehaviour
         //    Invoke("RestorePlayerLayer", restoreTime);
         //}
 
-        float moveY = Input.GetAxisRaw("Vertical");
+        //float moveY = Input.GetAxisRaw("Vertical");
+        float moveY = move.y;
         if (isOnwayPlatform && moveY < -0.1f /*&& Input.GetButtonDown("jump")*/)
         {
             gameObject.layer = LayerMask.NameToLayer("OnewayPlatform");

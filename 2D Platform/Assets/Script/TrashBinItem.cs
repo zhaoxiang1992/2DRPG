@@ -5,6 +5,22 @@ using UnityEngine;
 public class TrashBinItem : MonoBehaviour
 {
     private bool isPlayerInTrashBin;
+    private PlayerInputActions controls;
+    void Awake()
+    {
+        controls = new PlayerInputActions();
+        controls.GamePlay.Interactive.started += ctx => TrowCoin();
+    }
+
+    void OnEnable()
+    {
+        controls.GamePlay.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.GamePlay.Disable();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +30,12 @@ public class TrashBinItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //TrowCoin();
+    }
+
+    void TrowCoin()
+    { 
+        //if (Input.GetKeyDown(KeyCode.E))
         {
             if (isPlayerInTrashBin)
             {

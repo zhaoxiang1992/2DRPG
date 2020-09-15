@@ -5,6 +5,25 @@ using UnityEngine;
 public class ThrowBomb : MonoBehaviour
 {
     public GameObject bomb;
+
+    private PlayerInputActions controls;
+
+    void Awake()
+    {
+        controls = new PlayerInputActions();
+        controls.GamePlay.Item.started += ctx => TrowBomb();
+    }
+
+    void OnEnable()
+    {
+        controls.GamePlay.Enable();
+    }
+
+    void OnDisable()
+    {
+        controls.GamePlay.Disable();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +33,12 @@ public class ThrowBomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //TrowBomb();
+    }
+
+    void TrowBomb()
+    {
+        //if (Input.GetKeyDown(KeyCode.E))
         {
             Instantiate(bomb, transform.position, transform.rotation);
         }
