@@ -57,6 +57,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ArrowHit"",
+                    ""type"": ""Button"",
+                    ""id"": ""61e84526-a1c7-45c6-a82e-186fda27e637"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -312,6 +320,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Interactive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72c5a3c9-1c58-4bf9-b561-9175e743c944"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ArrowHit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -336,6 +355,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_GamePlay_Attack = m_GamePlay.FindAction("Attack", throwIfNotFound: true);
         m_GamePlay_Item = m_GamePlay.FindAction("Item", throwIfNotFound: true);
         m_GamePlay_Interactive = m_GamePlay.FindAction("Interactive", throwIfNotFound: true);
+        m_GamePlay_ArrowHit = m_GamePlay.FindAction("ArrowHit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -390,6 +410,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_GamePlay_Attack;
     private readonly InputAction m_GamePlay_Item;
     private readonly InputAction m_GamePlay_Interactive;
+    private readonly InputAction m_GamePlay_ArrowHit;
     public struct GamePlayActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -399,6 +420,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_GamePlay_Attack;
         public InputAction @Item => m_Wrapper.m_GamePlay_Item;
         public InputAction @Interactive => m_Wrapper.m_GamePlay_Interactive;
+        public InputAction @ArrowHit => m_Wrapper.m_GamePlay_ArrowHit;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -423,6 +445,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interactive.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnInteractive;
                 @Interactive.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnInteractive;
                 @Interactive.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnInteractive;
+                @ArrowHit.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnArrowHit;
+                @ArrowHit.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnArrowHit;
+                @ArrowHit.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnArrowHit;
             }
             m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -442,6 +467,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interactive.started += instance.OnInteractive;
                 @Interactive.performed += instance.OnInteractive;
                 @Interactive.canceled += instance.OnInteractive;
+                @ArrowHit.started += instance.OnArrowHit;
+                @ArrowHit.performed += instance.OnArrowHit;
+                @ArrowHit.canceled += instance.OnArrowHit;
             }
         }
     }
@@ -471,5 +499,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnItem(InputAction.CallbackContext context);
         void OnInteractive(InputAction.CallbackContext context);
+        void OnArrowHit(InputAction.CallbackContext context);
     }
 }
