@@ -72,4 +72,5 @@ crashlytics-build.properties
 /2D Platform/[Aa]ssets/[Ss]treamingAssets/aa/*
 
 /2D Platform/temp
+/2D Platform/Library/
 /UnderDream
